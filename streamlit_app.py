@@ -13,8 +13,7 @@ from sklearn.preprocessing import StandardScaler
 # 1. Page Configuration & Custom CSS
 # =====================================
 st.set_page_config(
-    page_title="ProphetAI | House Price Intelligence",
-    page_icon="🏠",
+    page_title="House Price Analysis & Predictor",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -91,7 +90,7 @@ def preprocess_data(df):
 
 # Sidebar setup
 st.sidebar.image("https://img.icons8.com/isometric-line/100/6366f1/home.png", width=60)
-st.sidebar.title("ProphetAI Control Panel")
+st.sidebar.title("House Price Analysis")
 
 uploaded_file = st.sidebar.file_to_change = st.sidebar.file_uploader("Upload custom Housing CSV", type=["csv"])
 
@@ -106,11 +105,11 @@ df_processed = preprocess_data(df_raw)
 # Sidebar Navigation
 navigation = st.sidebar.radio(
     "Navigation",
-    ["📊 Dashboard Overview", "🔮 AI Price Predictor", "🔍 Data Explorer", "📈 Model Benchmarks"]
+    ["Dashboard Overview", "House Price Predictor", "Data Explorer", "Model Benchmarks"]
 )
 
 # Header Banner
-st.markdown('<div class="main-title">ProphetAI Housing Intelligence</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">House Price Analysis</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Exploratory Analytics & Machine Learning Valuation System</div>', unsafe_allow_html=True)
 
 # =====================================
@@ -140,7 +139,7 @@ rf_model, lr_model, scaler, feature_names, X_test_scaled, y_test = train_models(
 # =====================================
 # TAB 1: DASHBOARD OVERVIEW
 # =====================================
-if navigation == "📊 Dashboard Overview":
+if navigation == "Dashboard Overview":
     st.subheader("Key Executive Metrics")
     
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -214,7 +213,7 @@ if navigation == "📊 Dashboard Overview":
 # =====================================
 # TAB 2: AI PRICE PREDICTOR
 # =====================================
-elif navigation == "🔮 AI Price Predictor":
+elif navigation == "House Price Predictor":
     st.subheader("Interactive Valuation Calculator")
     
     col_inputs, col_output = st.columns([1.2, 0.8])
@@ -297,7 +296,7 @@ elif navigation == "🔮 AI Price Predictor":
 # =====================================
 # TAB 3: DATA EXPLORER
 # =====================================
-elif navigation == "🔍 Data Explorer":
+elif navigation == "Data Explorer":
     st.subheader("Raw Data Inspector")
     
     c1, c2 = st.columns(2)
@@ -324,7 +323,7 @@ elif navigation == "🔍 Data Explorer":
     st.dataframe(filtered_df, use_container_width=True)
     
     st.download_button(
-        label="📥 Download Filtered Data as CSV",
+        label="Download Filtered Data as CSV",
         data=filtered_df.to_csv(index=False).encode('utf-8'),
         file_name="filtered_housing_data.csv",
         mime="text/csv"
@@ -333,7 +332,7 @@ elif navigation == "🔍 Data Explorer":
 # =====================================
 # TAB 4: MODEL BENCHMARKS
 # =====================================
-elif navigation == "📈 Model Benchmarks":
+elif navigation == "Model Benchmarks":
     st.subheader("Machine Learning Algorithm Comparison")
     
     lr_preds = lr_model.predict(X_test_scaled)
